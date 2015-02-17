@@ -5,6 +5,8 @@ way of coding. (i.e. includes, requires, etc.)
 
 Include Library
 ---------------
+When using this library, not everything is loaded all at once. This is helpful when only certain aspects of this library
+is meant to be used while others are not.
 ```
 <script src='chase/src/core.js'></script>
 ```
