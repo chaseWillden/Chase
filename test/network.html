@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Core Test</title>
+	<script type="text/javascript" src='../src/core.js'></script>
+</head>
+<body>
+	<script>
+		chase.include('chase.network');
+
+		chase.init(function(){
+			chase.network.check(function(passed){
+				console.log(passed);
+			}, {
+				loop: true
+			})
+		});
+	</script>
+</body>
+</html>

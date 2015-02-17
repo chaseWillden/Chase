@@ -94,6 +94,17 @@ chase.check.loaded = function(module){
 }
 
 /*
+*	Determines if the property is part of the object
+* and the object property contains value
+*/
+chase.check.prop = function(obj, prop){
+	if (chase.check.obj(obj)){
+		return obj[prop] && chase.check.null(obj[prop]);
+	}
+	return false;
+}
+
+/*
 *	Set the ex object
 */
 chase.ex = {};
@@ -132,7 +143,8 @@ chase.deps.modules = {
 	'chase.element': 'element/element.js',
 	'chase.element.a': 'element/a.js',
 	'chase.style': 'style/style.js',
-	'chase.math': 'math/math.js'
+	'chase.math': 'math/math.js',
+	'chase.network': 'network/network.js'
 };
 
 /*
@@ -165,7 +177,7 @@ chase.request_ = function(url, method, callback){
 	  xmlHttp.onreadystatechange = function(){
 		  if (this.readyState == 4){
 		  	if (this.status == 200 && chase.check.func(callback)){
-		  		callback(this.responseText);
+		  		callback(this.responseText, this);
 		  	}
 		  	else{
 		  		chase.ex.exception('Unable to load ' + url);
