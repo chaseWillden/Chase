@@ -7,13 +7,14 @@
 </head>
 <body>
 	<script>
-		chase.include('chase.net');
-		chase.include('chase.browser');	
+		chase.include('chase.browser');
 		chase.include('chase.element');
-		chase.include('chase.flatten');
 
 		chase.init(function(){
-			chase.element.append(document.body, 'Online: ' + chase.net.online());
+			var keys = Object.keys(chase.browser);
+			for (var i = 0; i < keys.length; i++){
+				chase.element.append(document.body, keys[i] + ': ' + chase.browser[keys[i]] + '<br>');
+			}
 		});
 	</script>
 </body>

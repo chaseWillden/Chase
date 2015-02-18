@@ -145,9 +145,11 @@ chase.deps.modules = {
 	'chase.element.a': 'element/a.js',
 	'chase.style': 'style/style.js',
 	'chase.math': 'math/math.js',
-	'chase.network': 'network/network.js',
+	'chase.net': 'net/network.js',
 	'chase.ui.color': 'ui/color.js',
-	'chase.ui.colorpicker': 'ui/colorpicker.js'
+	'chase.ui.colorpicker': 'ui/colorpicker.js',
+	'chase.browser': 'browser/browser.js',
+	'chase.flatten': 'util/flatten.js'
 };
 
 /*
