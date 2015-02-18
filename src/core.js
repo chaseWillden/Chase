@@ -68,7 +68,7 @@ chase.check.func = function(val){
 *	Returns not null or undefined
 */
 chase.check.null = function(val){
-	return val !== undefined || val !== null;
+	return val === undefined || val === null;
 }
 
 /*
@@ -137,6 +137,7 @@ chase.deps = chase.deps || {};
 
 /*
 *	Get the module path
+* This is just a quick way to get the path
 */
 chase.deps.modules = {
 	'chase.window': 'window/window.js',
@@ -144,7 +145,16 @@ chase.deps.modules = {
 	'chase.element.a': 'element/a.js',
 	'chase.style': 'style/style.js',
 	'chase.math': 'math/math.js',
-	'chase.network': 'network/network.js'
+	'chase.network': 'network/network.js',
+	'chase.ui.color': 'ui/color.js',
+	'chase.ui.colorpicker': 'ui/colorpicker.js'
+};
+
+/*
+*	Get the css path of the module
+*/
+chase.deps.css = {
+	'chase.ui.colorpicker': 'ui/colorpicker.css'
 };
 
 /*
@@ -238,6 +248,7 @@ chase.load_ = function(module, callback){
 			}
 			else if (chase.LOADING === 0 && chase.check.func(chase.INIT)){
 				chase.INIT();
+				chase.INIT = null;
 			}
 			if (!chase.check.loaded(module)){
 				chase.ex.param('Unable to load ' + module);

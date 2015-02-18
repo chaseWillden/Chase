@@ -46,3 +46,13 @@ chase.style.center = function(ele, type){
 		chase.ex.param('Style', 'Element');
 	}
 }
+
+/*
+*	Create style tags from text
+*/
+chase.style.fromText = function(txt, id){
+	chase.require('chase.element');
+	var style = chase.element.create('style', {id: id});
+	chase.element.append(style, txt);
+	chase.element.append(document.head, style);
+}

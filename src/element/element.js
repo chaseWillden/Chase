@@ -65,7 +65,7 @@ chase.element.width = function(ele){
 		ele = this.curr_;
 	}
 	if (chase.check.ele(ele)){
-		return ele.offsetWidth;
+		return chase.element.rect_(ele).width;
 	}
 	else{
 		chase.ex.param('Element', 'Element');
@@ -80,7 +80,7 @@ chase.element.height = function(ele){
 		ele = this.curr_;
 	}
 	if (chase.check.ele(ele)){
-		return ele.offsetHeight;
+		return chase.element.rect_(ele).height;
 	}
 	else{
 		chase.ex.param('Element', 'Element');
@@ -105,4 +105,63 @@ chase.element.attr = function(ele, name, value){
 	else{
 		chase.ex.param('element.attr', 'Element or String');
 	}
+}
+
+/*
+*	Attach an event to an element
+*/
+chase.element.event = function(ele, eventName, callback){
+	if (chase.check.ele(ele) && chase.check.str(eventName)){
+
+		/*
+		*	Prevent anonymous function
+		*/
+		function _eventListener(e){
+			if (chase.check.func(callback)){
+				var n = callback(this, e);
+				if (n){
+					_eventListenerRemove(e);
+				}
+			}
+		}
+
+		function _eventListenerRemove(e){
+			e.target.removeEventListener(e.type, _eventListener);
+		}
+
+		ele.addEventListener(eventName, _eventListener, true);
+	}
+	else{
+		chase.ex.param('element.event', 'Element or String');
+	}
+}
+
+/*
+*	Simple selection engine
+* Todo:
+*    1) Build a better selection engine
+*/
+chase.element.select = function(cssQuery){
+	return document.querySelectorAll(cssQuery);
+}
+
+/*
+*	Get the x
+*/
+chase.element.x = function(ele){
+	return chase.element.rect_(ele).left;
+}
+
+/*
+*	Get the y
+*/
+chase.element.y = function(ele){
+	return chase.element.rect_(ele).top;
+}
+
+/*
+*	Get the element's rectange
+*/
+chase.element.rect_ = function(ele){
+	return ele.getBoundingClientRect();
 }
