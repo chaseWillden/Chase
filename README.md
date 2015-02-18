@@ -11,20 +11,28 @@ is meant to be used while others are not.
 <script src='chase/src/core.js'></script>
 ```
 
-Create a blank hyperlink and center it on the page
+Include other modules
+---------------------
+Modules are included outside of the init function. The init function runs after all is loaded. 
+If there are other dependencies, error's will be thrown.
+
+Create a dynamic colorpicker
 --------------------------------------------------
 ```
-chase.include('chase.window');
+chase.include('chase.ui.color');
+chase.include('chase.ui.colorpicker');
 chase.include('chase.element');
 chase.include('chase.style');
-chase.include('chase.math');
+chase.include('chase.window');
 
 chase.init(function(){
-	chase.element.create('a', {id: 'test'}, function(link){
-		link.chase.append('This is a test');
-		link.chase.attr('href', '#');
-		chase.element.append(document.body, link);
-		chase.style.center(link, 'window');
+	var btn = chase.element.select('#dynamic')[0];
+	chase.element.event(btn, 'click', function(ele){
+		chase.ui.colorpicker.create(function(color){
+			document.body.style.backgroundColor = color;
+		}, {
+			below: btn
+		});
 	});
 });
 ```
