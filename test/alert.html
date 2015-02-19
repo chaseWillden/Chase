@@ -7,10 +7,13 @@
 </head>
 <body>
 	<script>
-		chase.include('chase.flatten');
+		chase.include('chase.ui.alert');
+		chase.include('chase.style');
+		chase.include('chase.element');
+		chase.include('chase.ui.color');
 
 		chase.init(function(){
-			var js = chase.flatten.toString(chase);
+			chase.ui.alert.create('This is a test');
 		});
 	</script>
 </body>

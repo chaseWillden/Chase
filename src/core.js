@@ -147,16 +147,21 @@ chase.deps.modules = {
 	'chase.math': 'math/math.js',
 	'chase.net': 'net/network.js',
 	'chase.ui.color': 'ui/color.js',
-	'chase.ui.colorpicker': 'ui/colorpicker.js',
+	'chase.ui.calendar': 'ui/calendar/calendar.js',
+	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.js',
+	'chase.ui.alert': 'ui/alert/alert.js',
 	'chase.browser': 'browser/browser.js',
-	'chase.flatten': 'util/flatten.js'
+	'chase.flatten': 'util/flatten.js',
+	'chase.date': 'date/date.js'
 };
 
 /*
 *	Get the css path of the module
 */
 chase.deps.css = {
-	'chase.ui.colorpicker': 'ui/colorpicker.css'
+	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.css',
+	'chase.ui.calendar': 'ui/calendar/calendar.css',
+	'chase.ui.alert': 'ui/alert/alert.css'
 };
 
 /*

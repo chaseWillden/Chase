@@ -7,10 +7,15 @@
 </head>
 <body>
 	<script>
-		chase.include('chase.flatten');
+		chase.include('chase.ui.calendar');
+		chase.include('chase.style');
+		chase.include('chase.element');
+		chase.include('chase.ui.color');
+		chase.include('chase.date');
+		chase.include('chase.math');
 
 		chase.init(function(){
-			var js = chase.flatten.toString(chase);
+			chase.ui.calendar.create();
 		});
 	</script>
 </body>
