@@ -36,3 +36,7 @@ chase.init(function(){
 	});
 });
 ```
+
+Todos
+-----
+ - https://github.com/gildas-lormeau/zip.js
