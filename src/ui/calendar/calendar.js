@@ -35,18 +35,27 @@ chase.ui.calendar.draw_ = function(css, options){
 	if (chase.check.str(css)){
 		chase.style.fromText(css, 'calendarStyle');
 	}
+	chase.require('chase.date');
+
+	var today = chase.date.today();
+
+	/*
+	*	Creating the table and headers
+	*/
 	var table = chase.element.create('table', {className: 'chase-calendar'});
 	var tr = chase.element.create('tr');
 	var left = chase.element.create('th');
 	chase.element.append(left, '<');
 	chase.element.append(tr, left);
 	var header = chase.element.create('th', {colSpan: '5'});
-	chase.element.append(header, 'March');
+	chase.element.append(header, today.month);
 	chase.element.append(tr, header);
 	var right = chase.element.create('th');
 	chase.element.append(right, '>');
 	chase.element.append(tr, right);
 	chase.element.append(table, tr);
+
+	var beginning = today.beginningOfMonth();
 
 	var tr = chase.element.create('tr');
 	for (var i = 0; i < 31; i++){

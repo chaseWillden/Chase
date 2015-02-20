@@ -150,6 +150,7 @@ chase.deps.modules = {
 	'chase.ui.calendar': 'ui/calendar/calendar.js',
 	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.js',
 	'chase.ui.alert': 'ui/alert/alert.js',
+	'chase.ui.table': 'ui/table/table.js',
 	'chase.browser': 'browser/browser.js',
 	'chase.flatten': 'util/flatten.js',
 	'chase.date': 'date/date.js'

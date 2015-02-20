@@ -43,6 +43,15 @@ chase.date.obj_.prototype.nextDay = function(){
 }
 
 /*
+*	Get the beginning of the month
+*/
+chase.date.obj_.prototype.beginningOfMonth = function(){
+	return new chase.date.obj_({
+		date: (this.date - ((this.day - 1) * chase.date.DAY))
+	})
+}
+
+/*
 *	Months array
 */
 chase.date.months_ = [

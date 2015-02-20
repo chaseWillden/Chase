@@ -104,7 +104,6 @@ chase.ui.colorpicker.draw_ = function(css, options, callback){
 
 		chase.element.append(td, div);
 	}
-	chase.element.append(table, tr);
 
 	/*
 	*	Create a blank row
@@ -133,6 +132,40 @@ chase.ui.colorpicker.draw_ = function(css, options, callback){
 
 		chase.element.append(table, tr);
 	}
+
+	/*
+	*	Create a blank row
+	*/
+	chase.ui.colorpicker.blankRow_(table);
+
+	/*
+	*	Create the custom words
+	*/
+	var tr = chase.element.create('tr');
+	var td = chase.element.create('td', {colSpan: 6});
+	chase.element.append(td, 'Custom');
+	chase.element.append(tr, td);
+	chase.element.append(table, tr);
+
+	/*
+	*	Create 6 white squares
+	*/
+	var tr = chase.element.create('tr');
+	for (var i = 0; i < 10; i++){
+		var td = chase.element.create('td');
+		var color = chase.ui.color.shade(chase.ui.color.BLACK, 9.2);
+		chase.style.set(td, 'backgroundColor', color);
+		chase.element.append(tr, td);
+
+		var div = chase.element.create('div', {className: 'colorpicker-hover', 'data-color': color});
+
+		chase.element.event(div, 'click', function(ele){
+			
+		});
+		chase.element.append(td, div);
+		chase.element.append(tr, td);
+	}
+	chase.element.append(table, tr);
 
 	if (chase.check.obj(options)){
 		if (chase.check.ele(options['below'])){
