@@ -1,0 +1,22 @@
+.right-click{
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.5);
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,.5);
+	box-shadow: 0 0 10px rgba(0,0,0,.5);
+	display: inline-block;
+	background-color: white;
+}
+
+.right-click-item{
+	padding: 5px 10px;
+	width: 170px;
+}
+
+.right-click-item:hover{
+	background-color: rgb(226, 226, 226);
+	cursor: pointer;
+}
+
+.right-click-divider{
+	border-bottom: solid 1px #EAEAEA;
+	padding: 0 10px;
+}

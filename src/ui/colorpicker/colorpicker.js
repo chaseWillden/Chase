@@ -34,6 +34,22 @@ chase.ui.colorpicker.blankRow_ = function(table){
 }
 
 /*
+*	Standard colorpicker colors
+*/
+chase.ui.colorpicker.standardColors = [
+		chase.ui.color.MAROON,
+		chase.ui.color.RED,
+		chase.ui.color.ORANGE,
+		chase.ui.color.YELLOW,
+		chase.ui.color.GREEN,
+		chase.ui.color.TEAL,
+		chase.ui.color.BLUE,
+		chase.ui.color.NEON_BLUE,
+		chase.ui.color.PURPLE,
+		chase.ui.color.PINK
+	];
+
+/*
 *	Draw the colorpicker
 */
 chase.ui.colorpicker.draw_ = function(css, options, callback){
@@ -75,21 +91,9 @@ chase.ui.colorpicker.draw_ = function(css, options, callback){
 	*	Create standard colors
 	*/
 	var tr = chase.element.create('tr');
-	var standardColors = [
-		chase.ui.color.MAROON,
-		chase.ui.color.RED,
-		chase.ui.color.ORANGE,
-		chase.ui.color.YELLOW,
-		chase.ui.color.GREEN,
-		chase.ui.color.TEAL,
-		chase.ui.color.BLUE,
-		chase.ui.color.NEON_BLUE,
-		chase.ui.color.PURPLE,
-		chase.ui.color.PINK
-	];
 	for (var i = 0; i < 10; i++){
 		var td = chase.element.create('td');
-		var color = standardColors[i];
+		var color = chase.ui.colorpicker.standardColors[i];
 		chase.style.set(td, 'backgroundColor', color);
 		chase.element.append(tr, td);
 
@@ -115,7 +119,7 @@ chase.ui.colorpicker.draw_ = function(css, options, callback){
 
 		for (var i = 0; i < 10; i++){
 			var td = chase.element.create('td');
-			var color = chase.ui.color.shade(standardColors[i], j - 3);
+			var color = chase.ui.color.shade(chase.ui.colorpicker.standardColors[i], j - 3);
 			chase.style.set(td, 'backgroundColor', color);
 			chase.element.append(tr, td);
 
@@ -160,7 +164,9 @@ chase.ui.colorpicker.draw_ = function(css, options, callback){
 		var div = chase.element.create('div', {className: 'colorpicker-hover', 'data-color': color});
 
 		chase.element.event(div, 'click', function(ele){
-			
+			chase.ui.colorpicker.advanced(function(ele){
+
+			});	
 		});
 		chase.element.append(td, div);
 		chase.element.append(tr, td);
@@ -197,4 +203,33 @@ chase.ui.colorpicker.draw_ = function(css, options, callback){
 	});
 
 	chase.element.append(document.body, table);
+}
+
+/*
+*	Create an advanced colorpicker
+*/	
+chase.ui.colorpicker.advanced = function(callback){
+	var url = chase.path_() + chase.img('chase.ui.colorpicker');
+	var div = chase.element.create('div', {className: 'advancedColorpicker'});
+	var img = chase.element.create('img', {src: url});
+
+	chase.element.event(img, 'mouseover', function(ele){
+		var chooser = chase.element.create('div', {className: 'colorPickerCircle', id: 'ch82'});
+		chase.element.append(div, chooser);
+	});
+
+	chase.element.event(img, 'mousemove', function(ele, e){
+		var x = e.x;
+		var y = e.y;
+		var chooser = chase.element.select('#ch82')[0];
+		chase.style.set(chooser, 'left', x + 'px');
+		chase.style.set(chooser, 'top', y + 'px');
+	});
+
+	chase.element.event(img, 'mouseout', function(ele){
+		chase.element.select('#ch82')[0].remove();
+	});
+
+	chase.element.append(div, img);
+	chase.element.append(document.body, div);
 }

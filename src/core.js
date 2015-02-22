@@ -151,6 +151,7 @@ chase.deps.modules = {
 	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.js',
 	'chase.ui.alert': 'ui/alert/alert.js',
 	'chase.ui.table': 'ui/table/table.js',
+	'chase.ui.menu.rightclick': 'ui/menu/rightclick.js',
 	'chase.browser': 'browser/browser.js',
 	'chase.flatten': 'util/flatten.js',
 	'chase.date': 'date/date.js'
@@ -162,7 +163,15 @@ chase.deps.modules = {
 chase.deps.css = {
 	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.css',
 	'chase.ui.calendar': 'ui/calendar/calendar.css',
+	'chase.ui.menu.rightclick': 'ui/menu/rightclick.css',
 	'chase.ui.alert': 'ui/alert/alert.css'
+};
+
+/*
+*	Get the img path of the module
+*/
+chase.deps.img = {
+	'chase.ui.colorpicker': 'ui/colorpicker/map.png'
 };
 
 /*
@@ -298,6 +307,23 @@ chase.init = function(callback){
 chase.require = function(module, where){
 	if (!chase.check.loaded(module)){
 		chase.ex.required(module, where);
+	}
+}
+
+/*
+*	Get the image url
+*/
+chase.img = function(module){
+	if (chase.check.str(module)){
+		if (chase.deps.img[module]){
+			return chase.deps.img[module];
+		}
+		else{
+			chase.ex.exception('Invalid image path');
+		}
+	}
+	else{
+		chase.ex.param('img', 'String');
 	}
 }
 

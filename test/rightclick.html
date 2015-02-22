@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Core Test</title>
+	<script type="text/javascript" src='../src/core.js'></script>
+</head>
+<body>
+	<script>
+		chase.include('chase.element');
+		chase.include('chase.ui.menu.rightclick');
+		chase.include('chase.ui.color');
+		chase.include('chase.style');
+
+		chase.init(function(){
+			chase.ui.menu.rightclick.create({
+				items: [
+					{
+						type: 'item',
+						name: 'Export'
+					},
+					{
+						type: 'item',
+						name: 'Import'
+					},
+					{
+						type: 'item',
+						name: 'Save as'
+					},
+					{
+						type: 'divider'
+					},
+					{
+						type: 'item',
+						name: 'Exit'
+					}
+				]
+			});
+		});
+	</script>
+</body>
+</html>
