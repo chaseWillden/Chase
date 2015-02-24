@@ -1,11 +1,14 @@
-/*
-*	Establish the chase.date object
-*/
+/**
+ * Establish the chase.date object
+ * @type {Object}
+ */
 chase.date = chase.date || {};
 
-/*
-*	This is the base date object
-*/
+/**
+ * This is the base date object
+ * @param  {Object}
+ * @return {Object}
+ */
 chase.date.obj_ = function(options){
 	if (chase.check.obj(options)){
 		if (options['date']){
@@ -24,36 +27,40 @@ chase.date.obj_ = function(options){
 	this.dayOfWeek = this.date.getDay();
 }
 
-/*
-*	Get the previous day
-*/
+/**
+ * Get the previous day
+ * @return {Object}
+ */
 chase.date.obj_.prototype.previousDay = function(){
 	return new chase.date.obj_({
 		date: this.date - chase.date.DAY
 	});
 }
 
-/*
-*	Get the next day
-*/
+/**
+ * Get the next day
+ * @return {Object}
+ */
 chase.date.obj_.prototype.nextDay = function(){
 	return new chase.date.obj_({
 		date: this.date + chase.date.DAY
 	});
 }
 
-/*
-*	Get the beginning of the month
-*/
+/**
+ * Get the beginning of the month
+ * @return {Object}
+ */
 chase.date.obj_.prototype.beginningOfMonth = function(){
 	return new chase.date.obj_({
 		date: (this.date - ((this.day - 1) * chase.date.DAY))
 	})
 }
 
-/*
-*	Months array
-*/
+/**
+ * Array of month names
+ * @type {Array}
+ */
 chase.date.months_ = [
 	'January',
 	'February',
@@ -69,51 +76,61 @@ chase.date.months_ = [
 	'December'
 ];
 
-/*
-*	Today
-*/
+/**
+ * Get the today's date object
+ * @return {Object}
+ */
 chase.date.today = function(){
 	return new chase.date.obj_();
 }
 
-/*
-*	1 Minute in miliseconds
-*/
+/**
+ * One Minute in miliseconds
+ * @type {Number}
+ */
 chase.date.MINUTE = 60000;
 
-/*
-*	1 Second in miliseconds
-*/
+/**
+ * 1 Second in miliseconds
+ * @type {Number}
+ */
 chase.date.SECOND = 1000;
 
-/*
-*	1 Hour in miliseconds
-*/
+/**
+ * 1 Hour in miliseconds
+ * @type {Number}
+ */
 chase.date.HOUR = chase.date.MINUTE * 60;
 
-/*
-*	1 Day in miliseconds
-*/
+/**
+ * 1 Day in miliseconds
+ * @type {Number}
+ */
 chase.date.DAY = chase.date.HOUR * 24;
 
-/*
-*	1 Week in miliseconds
-*/
+/**
+ * 1 Week in miliseconds
+ * @type {Number}
+ */
 chase.date.WEEK = chase.date.DAY * 7;
 
-/*
-*	This is a rough estimate of a month
-*/
+/**
+ * 1 Month in miliseconds. This is a rough estimate
+ * @type {Number}
+ */
 chase.date.MONTH = chase.date.DAY * 30.5;
 
-/*
-*	1 Year in miliseconds
-*/
+/**
+ * 1 Year in miliseconds
+ * @type {Number}
+ */
 chase.date.YEAR = chase.date.DAY * 365;
 
-/*
-*	This is the calculations the inputted time from now
-*/
+/**
+ * This is the calculations the inputted time from now
+ * @param  {String}
+ * @return {String}
+ */
 chase.date.fromNow = function(str){
 	chase.require('chase.date');
 	chase.require('chase.math');
@@ -136,9 +153,12 @@ chase.date.fromNow = function(str){
 	}
 }
 
-/*
-*	This creates the ago text
-*/
+/**
+ * This creates the ago text
+ * @param  {Number}
+ * @param  {String}
+ * @return {String}
+ */
 chase.date.from_ = function(diff, type){
 	if (diff < chase.date.SECOND){
 		return diff;

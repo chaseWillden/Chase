@@ -1,12 +1,13 @@
-/*
-*	Establish the chase.browser object
-*/
+/**
+ * Establish the chase.browser object
+ * @type {Object}
+ */
 chase.browser = chase.browser || {};
 
-/*
-*	Get the platform the browser is being run on
-* Reference: http://stackoverflow.com/questions/9514179/how-to-find-the-operating-system-version-using-javascript
-*/
+/**
+ * Get the platform the browser is being run on
+ * Reference: http://stackoverflow.com/questions/9514179/how-to-find-the-operating-system-version-using-javascript
+ */
 chase.browser.set_ = function(){
 	var unknown = '-';
 
@@ -165,6 +166,10 @@ chase.browser.set_ = function(){
       }
   }
 
+  /**
+   * Set all of the properties of the chase.browser object
+   * @type {Object}
+   */
 	var jscd = {
 	  screen: screenSize,
 	  browser: browser,
@@ -178,7 +183,7 @@ chase.browser.set_ = function(){
 	chase.browser = jscd;
 }
 
-/*
-*	Initialize
-*/
+/**
+ * Initialize and run the setup function above
+ */
 chase.browser.set_();

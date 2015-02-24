@@ -1,89 +1,117 @@
-/*
-*	Make sure the original chase object is created
-*/
-
+/**
+ * Ensure the creation of the chase object.
+ * @type {Object}
+ */
 var chase = chase || {};
 
-/*
-*	Define global consts
-*/
+/**
+ * Define the global macro
+ * @type {String}
+ */
 chase.GLOBAL = 'global';
+
+/**
+ * Define if the chase object is meant for a specific instance
+ * @type {String}
+ */
 chase.SPECIFIC = 'specific';
 
-/*
-*	Define the check functions
-*/
-chase.check = {};
+/**
+ * Define the chase.check object. The chase.check object
+ * is used to do any checks on types, or other test related items.
+ * @type {Object}
+ */
+chase.check = chase.check || {};
 
-/*
-*	Returns if the value is a string
-*/
+/**
+ * Returns true if the parameter is a string
+ * @param  {String}
+ * @return {Boolean}
+ */
 chase.check.str = function(val){
 	return typeof val === 'string';
 }
 
-/*
-*	Returns if the value is a int
-*/
+/**
+ * Returns true if the parameter is an int
+ * @param  {Number}
+ * @return {Boolean}
+ */
 chase.check.int = function(val){
 	return typeof val === 'number' && val.indexOf('.') < 0;
 }
 
-/*
-*	Returns if the value is a float
-*/
+/**
+ * Returns true if the value is a float
+ * @param  {Number}
+ * @return {Boolean}
+ */
 chase.check.float = function(val){
 	return typeof val === 'number' && val.indexOf('.') > -1;
 }
 
-/*
-*	Returns if the value is a number
-*/
+/**
+ * Returns true if the parameter is a number in general
+ * @param  {Number}
+ * @return {Boolean}
+ */
 chase.check.num = function(val){
-	return typeof val === 'number';
+	return chase.check.float(val) || chase.check.int(val);
 }
 
-/*
-*	Returns if the value is an array
-*/
+/**
+ * Returns true if the parameter is an array
+ * @param  {[type]}
+ * @return {[type]}
+ */
 chase.check.array = function(val){
 	return Object.prototype.toString.call(val) === '[object Array]';
 }
 
-/*
-*	Returns if the value is an object
-*/
+/**
+ * Returns
+ * @param  {Object}
+ * @return {Boolean}
+ */
 chase.check.obj = function(val){
 	return Object.prototype.toString.call(val) === '[object Object]';
 }
 
-/*
-*	Returns if the value is a function
-*/
+/**
+ * Returns true if the parameter is a function
+ * @param  {Function}
+ * @return {Boolean}
+ */
 chase.check.func = function(val){
 	return Object.prototype.toString.call(val) === '[object Function]';
 }
 
-/*
-*	Returns not null or undefined
-*/
+/**
+ * Returns true if the value is null or undefined
+ * @param  {Any}
+ * @return {Boolean}
+ */
 chase.check.null = function(val){
 	return val === undefined || val === null;
 }
 
-/*
-*	Returns if the value is an element
-*/
+/**
+ * Returns true if the value is an element
+ * @param  {Element}
+ * @return {Boolean}
+ */
 chase.check.ele = function(val){
-	return chase.check.str(val.tagName) && val.tagName.length > 0;
+	return val['tagName'] && chase.check.str(val.tagName) && val.tagName.length > 0;
 }
 
-/*
-*	Verifies the module loaded
-*/
-chase.check.loaded = function(module){
+/**
+ * Verifies that the module loaded.
+ * @param  {Module}
+ * @return {Boolean}
+ */
+chase.check.loaded = function(module, scope){
 	var split = module.split('.');
-	var parent = window;
+	var parent = scope || window;
 	for (var i = 0; i < split.length; i++){
 		if (!chase.check.obj(parent[split[i]])){
 			return false;
@@ -93,10 +121,13 @@ chase.check.loaded = function(module){
 	return true;
 }
 
-/*
-*	Determines if the property is part of the object
-* and the object property contains value
-*/
+/**
+ * Determines if the property is part of the object
+ * and the object property contains value
+ * @param  {Object}
+ * @param  {Property}
+ * @return {Boolean}
+ */
 chase.check.prop = function(obj, prop){
 	if (chase.check.obj(obj)){
 		return obj[prop] && chase.check.null(obj[prop]);
@@ -104,43 +135,58 @@ chase.check.prop = function(obj, prop){
 	return false;
 }
 
-/*
-*	Set the ex object
-*/
-chase.ex = {};
+/**
+ * Ensure the creation of the chase.ex object.
+ * This is reserve for exceptions
+ * @type {Object}
+ */
+chase.ex = chase.ex || {};
 
-/*
-* Throw parameters exception
-*/
+/**
+ * Throw a invalid parameter exception
+ * @param  {String}
+ * @param  {String}
+ * @return {Exception}
+ */
 chase.ex.param = function(lib, type){
 	throw new String('Expected parameters in "' + lib + '" to be ' + type);
 }
 
-/*
-*	Throw expected exception
-*/
+/**
+ * Throw a general exception
+ * @param  {String}
+ * @return {Exception}
+ */
 chase.ex.exception = function(msg){
 	throw new String(msg);
 }
 
-/*
-*	Throws a required exception
-*/
+/**
+ * Throws a required exception
+ * @param  {String}
+ * @param  {String}
+ * @return {Exception}
+ */
 chase.ex.required = function(what, where){
 	throw new String('Required ' + what + ' in ' + where);
 }
 
-/*
-*	check deps object
-*/
+/**
+ * Ensure the creation of the chase.ex object.
+ * This is reserved for chase.include('chase.')'s
+ * along with dependency css files and images
+ * @type {Object}
+ */
 chase.deps = chase.deps || {};
 
-/*
-*	Get the module path
-* This is just a quick way to get the path
-*/
+/**
+ * Get the module path. This is just a quick 
+ * way to get the path
+ * @type {Object}
+ */
 chase.deps.modules = {
 	'chase.window': 'window/window.js',
+	'chase.core': 'core.js',
 	'chase.element': 'element/element.js',
 	'chase.element.a': 'element/a.js',
 	'chase.style': 'style/style.js',
@@ -153,13 +199,13 @@ chase.deps.modules = {
 	'chase.ui.table': 'ui/table/table.js',
 	'chase.ui.menu.rightclick': 'ui/menu/rightclick.js',
 	'chase.browser': 'browser/browser.js',
-	'chase.flatten': 'util/flatten.js',
 	'chase.date': 'date/date.js'
 };
 
-/*
-*	Get the css path of the module
-*/
+/**
+ * Get the css path of the module
+ * @type {Object}
+ */
 chase.deps.css = {
 	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.css',
 	'chase.ui.calendar': 'ui/calendar/calendar.css',
@@ -167,23 +213,32 @@ chase.deps.css = {
 	'chase.ui.alert': 'ui/alert/alert.css'
 };
 
-/*
-*	Get the img path of the module
-*/
+/**
+ * Get the img path of the module
+ * @type {Object}
+ */
 chase.deps.img = {
 	'chase.ui.colorpicker': 'ui/colorpicker/map.png'
 };
 
-/*
-*	Checks if the path is a depedency
-*/
+/**
+ * Checks if the path is a depedency
+ * @param  {String}
+ * @return {Boolean}
+ */
 chase.deps.check = function(path){
 	return chase.check.str(chase.deps.modules[path]);
 }
 
-/*
-*	Extends the chase object
-*/
+/**
+ * Extending the chase object for 
+ * third party libraries
+ * @param  {String}
+ * @param  {String}
+ * @return {Boolean}
+ * Todo: 
+ * 		1) Get this working
+ */
 chase.extend_ = function(name, val){
 	if (chase.check.null(name) && chase.check.null(val)){
 		var lib = chase.request_
@@ -193,11 +248,15 @@ chase.extend_ = function(name, val){
 	}
 }
 
-/*
-*	Ajax request
-*/
+/**
+ * This is the bare bones for an AJAX request.
+ * @param  {String}
+ * @param  {String}
+ * @param  {Function}
+ * @return {Nothing}
+ */
 chase.request_ = function(url, method, callback){
-	if (chase.check.str(url) && chase.check.str(method)){
+	if (chase.check.str(url) && chase.check.str(method)){ // Simple checks
 		var xmlHttp = null;
 		method = method.toUpperCase();
 	  xmlHttp = new XMLHttpRequest();
@@ -219,16 +278,20 @@ chase.request_ = function(url, method, callback){
 	}
 }
 
-/*
-*	Get request
-*/
+/**
+ * Template for a GET request
+ * @param  {String}
+ * @param  {Function}
+ * @return {Nothing}
+ */
 chase.get_ = function(url, callback){
 	return chase.request_(url, 'GET', callback);
 }
 
-/*
-*	Get the current path of this file
-*/
+/**
+ * Get the current path of the file
+ * @return {String}
+ */
 chase.path_ = function(){
 	var scripts = document.getElementsByTagName('script');
 	for (var i = 0; i < scripts.length; i++){
@@ -240,34 +303,43 @@ chase.path_ = function(){
 	chase.ex.exception('Unable to retrieve path');
 }
 
-/*
-*	Loading const
-*/
+/**
+ * This constant is used to determine how many 
+ * calls are being made currently. This is specifically
+ * used in chase.include(). This prevents chase.init()
+ * from firing early or too late.
+ * @type {Number}
+ */
 chase.LOADING = 0;
 
-/*
-*	INIT function
-*/
+/**
+ * This is the variable we hold the init function
+ * @type {[type]}
+ */
 chase.INIT = null;
 
-/*
-*	This will load certain modules. This is the base lazy load function
-*/
+/**
+ * This will load certain modules. This is the base lazy load function
+ * @param  {String}
+ * @param  {Function}
+ * @return {Nothing}
+ */
 chase.load_ = function(module, callback){
 	if (chase.check.str(module) && chase.deps.check(module)){
-		chase.LOADING++;
+		chase.LOADING++; // Increment loading before the request
 		var path = chase.deps.modules[module];
 		chase.get_(chase.path_() + path, function(lib){
-			eval(lib);
-			chase.LOADING--;
+			eval(lib); // This is the simple way to compile the script
+			chase.CODE += lib; // Add the code to the chase.CODE object
+			chase.LOADING--; // Remove the loading from the stack
 			if (chase.check.func(callback)){
 					callback();
 			}
-			else if (chase.LOADING === 0 && chase.check.func(chase.INIT)){
+			else if (chase.LOADING === 0 && chase.check.func(chase.INIT)){ // This will run the init function
 				chase.INIT();
 				chase.INIT = null;
 			}
-			if (!chase.check.loaded(module)){
+			if (!chase.check.loaded(module)){ // Simple checks
 				chase.ex.param('Unable to load ' + module);
 			}
 		});
@@ -277,9 +349,12 @@ chase.load_ = function(module, callback){
 	}
 }
 
-/*
-*	Include a module in the file
-*/
+/**
+ * Include a module in the file
+ * @param  {String}
+ * @param  {Function}
+ * @return {Nothing}
+ */
 chase.include = function(module, callback){
 	if (chase.check.str(module) && chase.deps.check(module)){
 		chase.load_(module, callback);
@@ -289,9 +364,22 @@ chase.include = function(module, callback){
 	}
 }
 
-/*
-*	This will fire once everything is loaded
-*/
+/**
+ * This holds the code for everything. When compiling
+ * a script outside of dev mode, this gives the raw
+ * code.
+ * @type {String}
+ */
+chase.CODE = '';
+chase.get_(chase.path_() + 'core.js', function(data){
+	chase.CODE = data + chase.CODE;
+})
+
+/**
+ * This will fire once everything is loaded
+ * @param  {Function}
+ * @return {Nothing}
+ */
 chase.init = function(callback){
 	if (chase.check.func(callback)){
 		chase.INIT = callback;
@@ -301,18 +389,23 @@ chase.init = function(callback){
 	}
 }
 
-/*
-*	This will check if the module already has been included
-*/
+/**
+ * This will check if the module already has been included
+ * @param  {String}
+ * @param  {String}
+ * @return {Nothing}
+ */
 chase.require = function(module, where){
 	if (!chase.check.loaded(module)){
 		chase.ex.required(module, where);
 	}
 }
 
-/*
-*	Get the image url
-*/
+/**
+ * Get the image url
+ * @param  {String}
+ * @return {String}
+ */
 chase.img = function(module){
 	if (chase.check.str(module)){
 		if (chase.deps.img[module]){
@@ -327,7 +420,8 @@ chase.img = function(module){
 	}
 }
 
-/*
-*	Attach the chase object to window
-*/
+/**
+ * Attach the chase object to window
+ * @type {Object}
+ */
 window.chase = chase;

@@ -1,11 +1,15 @@
-/*
-*	Establish the chase.math object
-*/
+/**
+ * Establish the chase.math object
+ * @type {Object}
+ */
 chase.math = chase.math || {};
 
-/*
-*	Return the margins of the centered object
-*/
+/**
+ * Return the margins of the centered object
+ * @param  {Number}
+ * @param  {Number}
+ * @return {Number}
+ */
 chase.math.marginsCentered = function(larger, smaller){
 	if (chase.check.num(larger) && chase.check.num(smaller)){
 		return (larger - smaller) / 2;
@@ -15,9 +19,13 @@ chase.math.marginsCentered = function(larger, smaller){
 	}
 }
 
-/*
-*	Returns the floor of the number to the perscribed decimal place
-*/
+/**
+ * Returns the floor of the number to the perscribed decimal place
+ * @param  {Number}
+ * @param  {Number|Null}
+ * @param  {Boolean|Null}
+ * @return {Number}
+ */
 chase.math.floor = function(num, decimalPlaces, wholeNumber){
 	if (chase.check.num(num)){
 		if (chase.check.num(decimalPlaces)){
