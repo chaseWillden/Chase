@@ -199,7 +199,8 @@ chase.deps.modules = {
 	'chase.ui.table': 'ui/table/table.js',
 	'chase.ui.menu.rightclick': 'ui/menu/rightclick.js',
 	'chase.browser': 'browser/browser.js',
-	'chase.date': 'date/date.js'
+	'chase.date': 'date/date.js',
+	'chase.array': 'array/array.js'
 };
 
 /**
@@ -418,6 +419,14 @@ chase.img = function(module){
 	else{
 		chase.ex.param('img', 'String');
 	}
+}
+
+/**
+ * Export all the code in the session to javascript code.
+ * @return {[type]}
+ */
+chase.export = function(){
+	return chase.CODE;
 }
 
 /**
