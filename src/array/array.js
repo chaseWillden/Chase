@@ -101,7 +101,7 @@ chase.array.PROTOTYPE.splitAtValue = function(val){
  * @return {Nothing}
  */
 chase.array.PROTOTYPE.empty = function(){
-	this = [];
+	this.length = 0;
 }
 
 /**

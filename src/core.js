@@ -189,6 +189,8 @@ chase.deps.modules = {
 	'chase.core': 'core.js',
 	'chase.element': 'element/element.js',
 	'chase.element.a': 'element/a.js',
+	'chase.element.button': 'element/button.js',
+	'chase.element.query': 'element/query.js',
 	'chase.style': 'style/style.js',
 	'chase.math': 'math/math.js',
 	'chase.net': 'net/network.js',

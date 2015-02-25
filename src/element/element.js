@@ -142,7 +142,8 @@ chase.element.event = function(ele, eventName, callback){
 *    1) Build a better selection engine
 */
 chase.element.select = function(cssQuery){
-	return document.querySelectorAll(cssQuery);
+	chase.require('chase.element.query');
+	return chase.element.query(cssQuery);
 }
 
 /*
