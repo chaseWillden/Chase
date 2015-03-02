@@ -178,7 +178,7 @@ chase.array.PROTOTYPE.reverse = function(){
  * @return {Boolean}
  */
 chase.array.PROTOTYPE.remove = function(idx){
-	if (!chase.check.int(idx)){
+	if (chase.check.int(idx)){
 		var removed = this.splice(idx, 1);
 		return removed.length > 0;
 	}
@@ -194,10 +194,11 @@ chase.array.PROTOTYPE.remove = function(idx){
  */
 chase.array.PROTOTYPE.removeAllValues = function(val){
 	var worked = true;
+	var ary = this;
 	if (!chase.check.null(val)){
 		this.forEach(function(item, i){
 			if (item == val)
-				if (!this.remove(i))
+				if (!ary.remove(i))
 					worked = false;
 		});
 		return worked;

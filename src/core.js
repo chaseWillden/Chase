@@ -38,7 +38,7 @@ chase.check.str = function(val){
  * @return {Boolean}
  */
 chase.check.int = function(val){
-	return typeof val === 'number' && val.indexOf('.') < 0;
+	return Number(val) === val && val % 1 === 0;
 }
 
 /**
@@ -47,7 +47,7 @@ chase.check.int = function(val){
  * @return {Boolean}
  */
 chase.check.float = function(val){
-	return typeof val === 'number' && val.indexOf('.') > -1;
+	return typeof val === 'number' && !chase.check.int(val);
 }
 
 /**
@@ -202,7 +202,8 @@ chase.deps.modules = {
 	'chase.ui.menu.rightclick': 'ui/menu/rightclick.js',
 	'chase.browser': 'browser/browser.js',
 	'chase.date': 'date/date.js',
-	'chase.array': 'array/array.js'
+	'chase.array': 'array/array.js',
+	'chase.object': 'object/object.js'
 };
 
 /**
