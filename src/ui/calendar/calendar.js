@@ -136,6 +136,13 @@ chase.ui.calendar.draw_ = function(css, options){
 			}
 		}
 
+		if (td.innerHTML != ' ' &&
+			  chase.check.prop(chase.ui.calendar.selected_, date.year) && 
+			  chase.check.prop(chase.ui.calendar.selected_[date.year], date.month) && 
+			  chase.check.prop(chase.ui.calendar.selected_[date.year][date.month], td.innerHTML)){
+			chase.element.toggleClass(td, 'chase-calendar-selected');
+		}
+
 		var onselect = chase.check.prop(options, 'onSelect') && chase.check.func(options.onSelect);
 
 		td.onclick = function(){
@@ -164,7 +171,13 @@ chase.ui.calendar.draw_ = function(css, options){
 
 			chase.element.toggleClass(this, 'chase-calendar-selected');
 			if (onselect){
-				options.onSelect(this.innerHTML);
+				options.onSelect({
+					day: this.innerHTML,
+					month: date.month,
+					year: date.year,
+					str: date.date.toString()
+				});
+				console.log('');
 			}
 		}
 
