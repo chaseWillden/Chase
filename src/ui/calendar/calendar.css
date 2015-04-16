@@ -1,3 +1,36 @@
-.chase-calendar{
+.chase-calendar td{
+	padding: 4px;
+	text-align: center;
+}
+
+.chase-calendar td:hover{
+	background-color: #73B6BF;
+	cursor: pointer;
+}
 	
+.chase-calendar-nohover:hover{
+	background-color: white !important;
+	cursor: default !important;
+}
+
+.chase-calendar th:first-child a, .chase-calendar th:last-child a{
+	text-decoration: none;
+	color: black;
+	background-color: #E7E7E7;
+	display: block;
+	padding: 4px 6px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 0 3px rgba(0,0,0,.3);
+	-moz-box-shadow: 0 0 3px rgba(0,0,0,.3);
+	box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+
+.chase-today{
+	background-color: #73B6BF;
+}
+
+.chase-calendar-selected{
+	background-color: #e14d43;
 }

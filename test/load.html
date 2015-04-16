@@ -1,0 +1,20 @@
+<script>
+	chase.include('chase.ui.color');
+	chase.include('chase.ui.colorpicker');
+	chase.include('chase.element');
+	chase.include('chase.style');
+	chase.include('chase.window');
+	chase.include('chase.element.query');
+
+	chase.init(function(){
+		var btn = chase.element.select('#dynamic')[0];
+		chase.element.event(btn, 'click', function(ele){
+			chase.ui.colorpicker.create(function(color){
+				document.body.style.backgroundColor = color;
+			}, {
+				below: btn
+			});
+		});
+	});
+</script>
+<button id="dynamic">Dynamic Creation</button>

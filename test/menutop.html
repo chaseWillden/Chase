@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Core Test</title>
+	<script type="text/javascript" src='../src/core.js'></script>
+</head>
+<body>
+	<script>
+		chase.include('chase.element');
+		chase.include('chase.element.query');
+		chase.include('chase.ui.menu.top');
+		chase.include('chase.ui.color');
+		chase.include('chase.style');
+
+		chase.init(function(){
+			chase.ui.menu.top.create({
+				items: [
+					{
+						name: 'UI',
+						children: [
+							{name: 'Alert', 'href': '../test/alert.html'},
+							{name: 'Color Picker', href: '../test/colorpicker.html'},
+							{name: 'Calendar', href: '../test/calendar.html'},
+							{name: 'Button', href: '../test/button.html'},
+							{name: 'Table', href: '../test/table.html'},
+							{name: 'Right Click', href: '../test/rightclick.html'}
+						]
+					},
+					{
+						name: 'Browser',
+						children: [
+							{name: 'Browser Stats', href: '../test/browser.html'}
+						]
+					}
+				],
+				dest: 'body'
+			});
+
+			chase.net.load.all();
+
+		});
+	</script>
+</body>
+</html>

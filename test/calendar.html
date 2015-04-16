@@ -13,10 +13,22 @@
 		chase.include('chase.ui.color');
 		chase.include('chase.date');
 		chase.include('chase.math');
+		chase.include('chase.element.query');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
-			chase.ui.calendar.create();
+			chase.net.load.all();
+			var label = document.getElementById('label');
+			chase.ui.calendar.create({
+				onSelect: function(date){
+					label.innerHTML += '<br>Updated: ' + date.month + ' ' + date.day + ', ' + date.year + ' ' + chase.date.fromNow(date.str);
+				}
+			}, function(cal){
+				document.body.appendChild(cal);
+			});
 		});
 	</script>
+	<load href='common/menu.html'></load>
+	<span id='label' style='float:right'><span>
 </body>
 </html>

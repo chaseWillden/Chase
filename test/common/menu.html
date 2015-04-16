@@ -1,0 +1,33 @@
+<script>
+	chase.include('chase.element');
+	chase.include('chase.element.query');
+	chase.include('chase.ui.menu.top');
+	chase.include('chase.ui.color');
+	chase.include('chase.style');
+	chase.include('chase.net.load');
+
+	chase.init(function(){
+		chase.ui.menu.top.create({
+			items: [
+				{
+					name: 'UI',
+					children: [
+						{name: 'Alert', 'href': 'alert.html'},
+						{name: 'Color Picker', href: 'colorpicker.html'},
+						{name: 'Calendar', href: 'calendar.html'},
+						{name: 'Button', href: 'button.html'},
+						{name: 'Table', href: 'table.html'},
+						{name: 'Right Click', href: 'rightclick.html'}
+					]
+				},
+				{
+					name: 'Browser',
+					children: [
+						{name: 'Browser Stats', href: 'browser.html'}
+					]
+				}
+			],
+			dest: 'body'
+		});
+	});
+</script>

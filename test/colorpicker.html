@@ -17,8 +17,11 @@
 		chase.include('chase.element');
 		chase.include('chase.style');
 		chase.include('chase.window');
+		chase.include('chase.element.query');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
+			chase.net.load.all();
 			var btn = chase.element.select('#dynamic')[0];
 			chase.element.event(btn, 'click', function(ele){
 				chase.ui.colorpicker.create(function(color){
@@ -30,5 +33,6 @@
 		});
 	</script>
 	<button id="dynamic">Dynamic Creation</button>
+	<load href='common/menu.html'></load>
 </body>
 </html>

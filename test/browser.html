@@ -9,13 +9,19 @@
 	<script>
 		chase.include('chase.browser');
 		chase.include('chase.element');
+		chase.include('chase.element.query');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
+			chase.net.load.all();
+			
 			var keys = Object.keys(chase.browser);
+			document.body.innerHTML += "<br><br>";
 			for (var i = 0; i < keys.length; i++){
 				chase.element.append(document.body, keys[i] + ': ' + chase.browser[keys[i]] + '<br>');
 			}
 		});
 	</script>
+	<load href='common/menu.html'></load>
 </body>
 </html>

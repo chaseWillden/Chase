@@ -57,6 +57,18 @@ chase.element.append = function(parent, child){
 	}
 }
 
+/**
+ * Replace an element
+ * @param  {Element} whatEle
+ * @param  {Element} withEle [description]
+ */
+chase.element.replace = function(whatEle, withEle){
+	if (!chase.check.ele(whatEle) || !chase.check.ele(withEle)){
+		chase.ex.param('element.replace', 'Element');
+	}
+	whatEle.parentElement.replaceChild(withEle, whatEle);
+}
+
 /*
 *	Get the width of an element
 */
@@ -97,14 +109,66 @@ chase.element.attr = function(ele, name, value){
 	if (chase.check.ele(ele) && chase.check.str(name)){
 		if (chase.check.str(value)){
 			ele[name] = value;
+			ele.setAttribute(name, value);
 		}
 		else{
-			return ele[name];
+			return ele.getAttribute(name);
 		}
 	}
 	else{
 		chase.ex.param('element.attr', 'Element or String');
 	}
+}
+
+/*
+*	Add a class to the element
+*/
+chase.element.addClass = function(ele, name){
+	if (this.type == chase.SPECIFIC){
+		ele = this.curr_;
+	}
+	if (chase.check.ele(ele) && chase.check.str(name)){
+		if (ele.className.length == 0){
+			ele.className += name;
+		}
+		else{
+			ele.className += ' ' + name;
+		}
+	}
+	else{
+		chase.ex.param('element.attr', 'Element or String');
+	}
+}
+
+/**
+ * Toggles an elements class
+ * @param  {Element} ele  
+ * @param  {String} name
+ */
+chase.element.toggleClass = function(ele, name){
+	if (!chase.check.ele(ele) || !chase.check.str(name)){
+		chase.ex.param('element.toggleClass', 'Element | String');
+	}
+
+	if (ele.className.indexOf(name) > -1){
+		ele.className = ele.className.replace(name, '');
+	}
+	else{
+		ele.className += ' ' + name;
+	}
+}
+
+/**
+ * Returns true if the element has the class
+ * @param  {Element}  ele 
+ * @param  {String}  name 
+ * @return {Boolean}      
+ */
+chase.element.hasClass = function(ele, name){
+	if (!chase.check.ele(ele) || !chase.check.str(name)){
+		chase.ex.param('element.hasClass', 'Element | String');
+	}
+	return ele.className.indexOf(name) > -1;
 }
 
 /*
@@ -143,7 +207,7 @@ chase.element.event = function(ele, eventName, callback){
 */
 chase.element.select = function(cssQuery){
 	chase.require('chase.element.query');
-	return chase.element.query(cssQuery);
+	return chase.element.query.all(cssQuery);
 }
 
 /*

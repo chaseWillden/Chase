@@ -58,6 +58,14 @@ chase.date.obj_.prototype.beginningOfMonth = function(){
 }
 
 /**
+ * Get the total days in the month
+ * @return {Number} 
+ */
+chase.date.obj_.prototype.totalDaysInMonth = function(){
+	return new Date(this.year, this.date.getMonth() + 1, 0).getDate();
+}
+
+/**
  * Array of month names
  * @type {Array}
  */
@@ -82,6 +90,20 @@ chase.date.months_ = [
  */
 chase.date.today = function(){
 	return new chase.date.obj_();
+}
+
+/**
+ * Get the date of the specified string
+ * @param  {String} dateStr 
+ * @return {Chase.Date}
+ */
+chase.date.new = function(dateStr){
+	if (!chase.check.str(dateStr)){
+		chase.ex.param('date.new', 'String');
+	}
+	return new chase.date.obj_({
+		date: dateStr
+	});
 }
 
 /**

@@ -11,10 +11,14 @@
 		chase.include('chase.style');
 		chase.include('chase.element');
 		chase.include('chase.ui.color');
+		chase.include('chase.element.query');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
+			chase.net.load.all();
 			chase.ui.alert.create('This is a test');
 		});
 	</script>
+	<load href='common/menu.html'></load>
 </body>
 </html>
