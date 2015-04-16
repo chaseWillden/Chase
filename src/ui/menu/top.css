@@ -1,0 +1,59 @@
+body{
+	padding-top: 32px;
+}
+
+.chase-menu-top{
+	list-style: none;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	position: fixed;
+	padding: 0;
+	background-color: #363b3f;
+}
+
+.chase-menu-top li{
+	cursor: pointer;
+}
+
+.chase-menu-top > li{
+	float: left;
+	position: relative;
+}
+
+.chase-menu-top > li > a{
+	text-decoration: none;
+	color: white;
+	padding: 8px 12px;
+	display: block;
+}
+
+.chase-menu-top > li > a:hover{
+	background-color: #26292c;
+}
+
+.chase-menu-top > li > ul{
+	display: none;
+	position: absolute;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background-color: #363b3f;
+	min-width: 130px;
+}
+
+.chase-menu-top > li > ul > li > a{
+	text-decoration: none;
+	color: white;
+	padding: 7px 12px 7px 12px;
+	display: block;
+}
+
+.chase-menu-top > li > ul > li > a:hover{
+	background-color: #26292c;
+}
+
+.chase-menu-top > li:hover > ul{
+	display: block;
+}

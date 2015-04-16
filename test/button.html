@@ -8,14 +8,17 @@
 <body>
 	<script>	
 		chase.include('chase.element');
-		chase.include('chase.element.button');
+		chase.include('chase.style');
+		chase.include('chase.ui.button');
+		chase.include('chase.element.query');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
-			var btn = chase.element.button.create('test', function(){
-
-			});
+			chase.net.load.all();
+			var btn = chase.ui.button.create('Create');
 			console.log(btn);
 		});
 	</script>
+	<load href='common/menu.html'></load>
 </body>
 </html>

@@ -13,10 +13,20 @@
 		chase.include('chase.ui.color');
 		chase.include('chase.date');
 		chase.include('chase.math');
+		chase.include('chase.element.query');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
-			chase.ui.calendar.create();
+			chase.net.load.all();
+			chase.ui.calendar.create({
+				onSelect: function(date){
+					
+				}
+			}, function(cal){
+				document.body.appendChild(cal);
+			});
 		});
 	</script>
+	<load href='common/menu.html'></load>
 </body>
 </html>

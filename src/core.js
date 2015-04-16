@@ -130,7 +130,7 @@ chase.check.loaded = function(module, scope){
  */
 chase.check.prop = function(obj, prop){
 	if (chase.check.obj(obj)){
-		return obj[prop] && chase.check.null(obj[prop]);
+		return obj[prop] && !chase.check.null(obj[prop]);
 	}
 	return false;
 }
@@ -188,18 +188,19 @@ chase.deps.modules = {
 	'chase.window': 'window/window.js',
 	'chase.core': 'core.js',
 	'chase.element': 'element/element.js',
-	'chase.element.a': 'element/a.js',
-	'chase.element.button': 'element/button.js',
 	'chase.element.query': 'element/query.js',
 	'chase.style': 'style/style.js',
 	'chase.math': 'math/math.js',
 	'chase.net': 'net/network.js',
+	'chase.net.load': 'net/load.js',
 	'chase.ui.color': 'ui/color.js',
 	'chase.ui.calendar': 'ui/calendar/calendar.js',
 	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.js',
 	'chase.ui.alert': 'ui/alert/alert.js',
 	'chase.ui.table': 'ui/table/table.js',
 	'chase.ui.menu.rightclick': 'ui/menu/rightclick.js',
+	'chase.ui.menu.top': 'ui/menu/top.js',
+	'chase.ui.button': 'ui/button/button.js',
 	'chase.browser': 'browser/browser.js',
 	'chase.date': 'date/date.js',
 	'chase.array': 'array/array.js',
@@ -214,6 +215,7 @@ chase.deps.css = {
 	'chase.ui.colorpicker': 'ui/colorpicker/colorpicker.css',
 	'chase.ui.calendar': 'ui/calendar/calendar.css',
 	'chase.ui.menu.rightclick': 'ui/menu/rightclick.css',
+	'chase.ui.menu.top': 'ui/menu/top.css',
 	'chase.ui.alert': 'ui/alert/alert.css'
 };
 
@@ -320,7 +322,7 @@ chase.LOADING = 0;
  * This is the variable we hold the init function
  * @type {[type]}
  */
-chase.INIT = null;
+chase.INIT = [];
 
 /**
  * This will load certain modules. This is the base lazy load function
@@ -329,6 +331,7 @@ chase.INIT = null;
  * @return {Nothing}
  */
 chase.load_ = function(module, callback){
+	chase.loading(true);
 	if (chase.check.str(module) && chase.deps.check(module)){
 		chase.LOADING++; // Increment loading before the request
 		var path = chase.deps.modules[module];
@@ -339,9 +342,15 @@ chase.load_ = function(module, callback){
 			if (chase.check.func(callback)){
 					callback();
 			}
-			else if (chase.LOADING === 0 && chase.check.func(chase.INIT)){ // This will run the init function
-				chase.INIT();
-				chase.INIT = null;
+			else if (chase.LOADING === 0 && chase.check.array(chase.INIT)){ // This will run the init function
+				for (var i = 0; i < chase.INIT.length; i++){
+					if (i > 15){
+						break;
+					}
+					chase.INIT[i]();
+				}
+				chase.loading(false);
+				chase.INIT = [];
 			}
 			if (!chase.check.loaded(module)){ // Simple checks
 				chase.ex.param('Unable to load ' + module);
@@ -350,6 +359,49 @@ chase.load_ = function(module, callback){
 	}
 	else{
 		chase.ex.param('include', 'strings');
+	}
+}
+
+chase.loading = function(start){
+	var l = document.getElementById('chase-loading');
+	if (!l && start){
+		document.body.innerHTML += '<div id="chase-loading"></div>';
+		var l = document.getElementById('chase-loading');
+		l.style.position = 'fixed';
+		l.style.left = '0';
+		l.style.right = '0';
+		l.style.top = '0';
+		l.style.bottom = '0';
+		l.style.backgroundColor = '#363b3f';
+		l.style.zIndex = 99999;
+		l.style.color = 'white';
+		l.style.fontSize = '32px';
+		l.style.textAlign = 'center';
+		l.style.paddingTop = '15%';
+		l.innerHTML = 'Loading<br>';
+		var count = 0;
+		var interval = setInterval(function(){
+			if (count == 30){
+				clearInterval(interval);
+				if (l){
+					l.innerHTML = "Error";
+				}
+			}
+			l.innerHTML += '_';
+			count++;
+		}, 92);
+		
+	}
+	else if (!start){
+		setTimeout(function(){
+			var l = document.getElementById('chase-loading');
+			if (l){
+				l.remove();
+			}
+		}, 1000);
+	}
+	else{
+		
 	}
 }
 
@@ -386,7 +438,7 @@ chase.get_(chase.path_() + 'core.js', function(data){
  */
 chase.init = function(callback){
 	if (chase.check.func(callback)){
-		chase.INIT = callback;
+		chase.INIT.push(callback);
 	}
 	else{
 		chase.ex.param('core', 'Function');

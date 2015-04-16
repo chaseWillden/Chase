@@ -11,8 +11,11 @@
 		chase.include('chase.ui.menu.rightclick');
 		chase.include('chase.ui.color');
 		chase.include('chase.style');
+		chase.include('chase.element.query');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
+			chase.net.load.all();
 			chase.ui.menu.rightclick.create({
 				items: [
 					{
@@ -38,5 +41,6 @@
 			});
 		});
 	</script>
+	<load href='common/menu.html'></load>
 </body>
 </html>

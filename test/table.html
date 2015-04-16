@@ -8,11 +8,14 @@
 <body>
 	<script>	
 		chase.include('chase.element');
+		chase.include('chase.element.query');
 		chase.include('chase.ui.table');
+		chase.include('chase.net.load');
 
 		chase.init(function(){
-			
+			chase.net.load.all();
 		});
 	</script>
+	<load href='common/menu.html'></load>
 </body>
 </html>
