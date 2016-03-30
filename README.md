@@ -16,6 +16,8 @@ Include other modules
 Modules are included outside of the init function. The init function runs after all is loaded. 
 If there are other dependencies, error's will be thrown.
 
+ - [] test
+
 Create a dynamic colorpicker
 --------------------------------------------------
 ```
